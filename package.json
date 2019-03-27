@@ -1,0 +1,22 @@
+{
+  "name": "dailytest",
+  "version": "1.0.0",
+  "description": "* 姓名:赵雷涛\r * 联系方式:17803267921(廊坊)\r * 邮箱: tom.vista@outlook.com\r ## 学历\r * 2014-2018 | 北华航天工业学院(本科) | 软件工程专业\r ## 职位意向\r * web开发\r ## 技术\r * node.js\r * bootstrap\r * vue\r * ASP.NET MVC\r ## 工作经验\r * 2018.08-至今 | 中国电建集团河北工程有限公司 | web开发",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomVista/DailyTest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomVista/DailyTest/issues"
+  },
+  "homepage": "https://github.com/TomVista/DailyTest#readme",
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}

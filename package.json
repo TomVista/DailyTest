@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/TomVista/DailyTest#readme",
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7",
     "vue": "^2.6.10"
   }
 }

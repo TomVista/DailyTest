@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script src="./Chart.js"></script>
+</head>
+
+<body>
+    <div id="container">
+        <canvas id="content">
+
+        </canvas>
+    </div>
+    <script>
+        Chart.Tooltip.positioners.custom = function (elements, eventPosition) {
+            return eventPosition;
+        }
+        var ctx = document.getElementById('content').getContext('2d');
+        var config = {
+            type: 'line',
+            data: {
+                labels: ['Item 1', 'Item 2', 'Item 3'],
+                datasets: [{
+                    label: '1a',
+                    data: [10, 20, 30],
+                    backgroundColor: 'red'
+                }, {
+                    label: '2b',
+                    data: [20, 20, 40],
+                    backgroundColor: 'blue'
+                }]
+            },
+            options: {
+                legendCallback: function (e) {
+                    console.log(e);
+                    return e;
+                },
+                legend: {
+                    display: true,
+                    labels: {
+                        fontColor: 'rgb(255, 99, 132)',
+                        padding: 10,
+                        /* generateLabels:function(context){
+                            console.log(context.legend)
+                        }, */
+                        /* filter:function(item,data){
+                            console.log(item)
+                            console.log(data)
+                        }, */
+                        usePointStyle: true
+                    }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                    caretPadding: 10,
+                    caretSize: 10,
+                    cornerRadius: 10,
+                    multiKeyBackground: 'rgba(0,0,0,0)',
+                    displayColors: true,
+                    borderColor: 'rgb(1,2,3)',
+                    borderWidth: 10,
+                    xPadding:100,
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += Math.round(tooltipItem.yLabel * 100) / 100;
+                            return label+'重绘';
+                        }
+                    }
+                }
+            }
+        }
+        window.onload = function () {
+            this.line = new Chart(ctx, config);
+        }
+    </script>
+</body>
+
+</html>

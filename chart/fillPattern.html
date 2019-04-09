@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./Chart.bundle.js"></script>
+</head>
+
+<body>
+    <div style="width:1000px;height:1000px;">
+        <canvas id="mycanvas" >
+        </canvas>
+    </div>
+    
+    <script>
+        var img = new Image();
+        img.src = './image/timg_03.gif';
+        img.onload = function () {//img缓存完成触发
+            var ctx = document.getElementById('mycanvas').getContext('2d');
+            var fillPattern = ctx.createPattern(img, 'repeat');
+            window.chart = new Chart(ctx, {
+                type:'bar',
+                data: {
+                    labels: ['Item 1', 'Item 2', 'Item 3'],
+                    datasets: [{
+                        data: [10, 20, 30],
+                        backgroundColor: fillPattern
+                    }]
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

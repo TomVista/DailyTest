@@ -2,71 +2,72 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>滚动穿透</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
-    <script src="../../node_modules/jquery/dist/jquery.js"></script>
-    <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="../../node_modules/vue/dist/vue.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>滚动穿透</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="../../node_modules/bootstrap/dist/css/bootstrap.css">
+  <script src="../../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../../node_modules/vue/dist/vue.js"></script>
 </head>
 <style>
-    html,
-    body {
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-    }
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
 
-    .body {
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        overflow: auto;
-    }
+  .body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+  }
 
-    .overstory {
-        position: fixed;
-        top: 0;
-        padding: 0;
-        margin: 0;
-    }
+  .overstory {
+    position: fixed;
+    top: 0;
+    padding: 0;
+    margin: 0;
+  }
+
 </style>
 
 <body>
-    <div class="body">
-        <div style="width:400px;height:400px;margin:auto;background-color:aqua;overflow: auto">
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
-        </div>
+  <div class="body">
+    <div style="width:400px;height:400px;margin:auto;background-color:aqua;overflow: auto">
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: blueviolet"></div>
     </div>
-    <div class="overstory">
-        <div style="width:200px;height:200px;margin:auto;background-color:royalblue;overflow: auto">
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
-            <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
-        </div>
-        <p>只能解决类似modal dialog的滚动穿透.</p>
-        <p>滚动包含滚动的情况还是需要使用js来实现</p>
-        <p>原理:</p>
-        <ul>
-            <li>两个滚动不具有父子关系,不在一条dom分支上,就不会接收到同一个scroll事件</li>
-        </ul>
+  </div>
+  <div class="overstory">
+    <div style="width:200px;height:200px;margin:auto;background-color:royalblue;overflow: auto">
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
+      <div style="width:80px;height:80px;margin-top: 20px;background-color: red"></div>
     </div>
+    <p>只能解决类似modal dialog的滚动穿透.</p>
+    <p>滚动包含滚动的情况还是需要使用js来实现</p>
+    <p>原理:</p>
+    <ul>
+      <li>两个滚动不具有父子关系,不在一条dom分支上,就不会接收到同一个scroll事件</li>
+    </ul>
+  </div>
 </body>
 
 </html>

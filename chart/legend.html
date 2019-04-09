@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./Chart.bundle.js"></script>
+</head>
+
+<body>
+  <div id="container">
+    <canvas id="content">
+
+    </canvas>
+  </div>
+  <script>
+    //点击图表任何地方都会触发click事件 触摸对应mouseup事件
+    Chart.defaults.global.onClick = function () {
+      console.log('鼠标点击')
+    };
+    //全局的颜色,任意颜色选项的基础.例:没有配置工具提示边框颜色,将使用全局默认颜色.
+    Chart.defaults.global.defaultColor = 'red'
+    Chart.defaults.global.showLines = false;
+
+    /* 响应式选项 */
+    //图表响应容器大小变化
+    Chart.defaults.global.responsive = true;
+    //图表响应容器大小时动画播放时间
+    Chart.defaults.global.responsiveAnimationDuration = 0;
+    //图表宽/高比例
+    Chart.defaults.global.aspectRatio = 1;
+    //图表响应容器大小时是否保持原始比例,此选项优先级比较高,通过js调整容器大小时需要此项为false,否则图表大小以宽高比和父容器宽度为准
+    Chart.defaults.global.maintainAspectRatio = true;
+    //图表响应容器大小的回调函数
+    Chart.defaults.global.onResize = function () {
+      console.log('图标大小响应式变化')
+    };
+
+    /* 全局的悬浮事件配置 */
+    //tooltips hover 监听事件
+    Chart.defaults.global.events = [
+      'mousemove',
+      'mouseout',
+      'click',
+      'touchstart',
+      'touchmove'
+    ];
+    Chart.defaults.global.hover.mode = 'dataset'; //['point','nearest','index','dataset','x','y']
+    Chart.defaults.global.hover.intersect = false;
+    /* Chart.defaults.global.hover.axis = 'xy'; */
+    Chart.defaults.global.hover.animationDuration = 100;
+    Chart.defaults.global.hover.onHover = function () {
+      console.log('鼠标悬浮')
+    };
+    /* Chart.defaults.global.hover.onClick = function(){
+      console.log('鼠标点击')
+    }; */
+
+    /* 字体选项 */
+    Chart.defaults.global.defaultFontColor = 'rgb(23,22,255)'
+    Chart.defaults.global.defaultFontFamily
+    //不适用于 radialLinear scale point labels.
+    Chart.defaults.global.defaultFontSize
+    //不适用于tooltip title 或 footer,标题
+    Chart.defaults.global.defaultFontStyle
+
+    /* 全局元素样式,这里只包含线图样式 */
+    //线的曲率,0为折线图
+    Chart.defaults.global.elements.line.tension = 0.2;
+    //是否填充线和x轴包含的区域
+    Chart.defaults.global.elements.line.fill = true;
+    //线和x轴包含的区域的颜色
+    Chart.defaults.global.elements.line.backgroundColor = 'rgba(25,0,0,0.2)';
+    //线的粗细
+    Chart.defaults.global.elements.line.borderWidth = 3;
+    //线的颜色
+    Chart.defaults.global.elements.line.borderColor = 'rgb(255,0,0)';
+    Chart.defaults.global.elements.line.borderCapStyle = 'butt';
+    Chart.defaults.global.elements.line.borderDash = [];
+    Chart.defaults.global.elements.line.borderDashOffset = 10;
+    Chart.defaults.global.elements.line.borderJoinStyle = 'miter';
+    Chart.defaults.global.elements.line.capBezierPoints = 1;
+    //是否启用阶梯线,true覆盖tension
+    Chart.defaults.global.elements.line.stepped = false;
+
+    /* 图表在父容器内的布局 */
+    Chart.defaults.global.layout.padding = {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0
+    }
+
+    /* 全局动画设置 */
+    /* 动画播放时间 */
+    Chart.defaults.global.animation.duration = 500;
+    /* 动画模式 */
+    Chart.defaults.global.animation.easing = 'easeOutQuart';
+    /* Chart.defaults.global.animation.onProgress = function () {
+      console.log('动画正在播放');
+    };; */
+    /* Chart.defaults.global.animation.onComplete = function () {
+      console.log('动画完成');
+    }; */
+
+    /* 全局工具提示 */
+    /* 是否启用工具提示 */
+    Chart.defaults.global.tooltips.enabled =true;
+    /* 自定义工具提示 */
+    /* Chart.defaults.global.tooltips.custom =function(){}; */
+
+    /* 工具提示展示数据的模式 *///['point','nearest','index','dataset','x','y']
+    Chart.defaults.global.tooltips.mode ='index';
+    /* 是否 只当鼠标在数据点上时,显示工具提示 */
+    Chart.defaults.global.tooltips.intersect =false;
+    /* 工具提示的位置 */ // ['nearest','average']
+    Chart.defaults.global.tooltips.position ='nearest';
+    /* 背景颜色 */
+    Chart.defaults.global.tooltips.backgroundColor ='rgba(0, 0, 0, 0.8)';
+    Chart.defaults.global.tooltips.titleFontStyle ='bold';
+    Chart.defaults.global.tooltips.titleSpacing =10;
+    Chart.defaults.global.tooltips.titleMarginBottom =10;
+    Chart.defaults.global.tooltips.titleFontColor ='rgba(222, 111, 77, 1)';
+    Chart.defaults.global.tooltips.titleAlign ='left';
+    Chart.defaults.global.tooltips.bodySpacing =10;
+    Chart.defaults.global.tooltips.bodyFontColor ='rgba(233, 29, 213, 0.8)';
+    Chart.defaults.global.tooltips.footerFontStyle ='bold';
+    Chart.defaults.global.tooltips.footerSpacing =10;
+    Chart.defaults.global.tooltips.footerMarginTop =10;
+    Chart.defaults.global.tooltips.footerFontColor ='rgba(22, 0, 22, 0.8)';
+    Chart.defaults.global.tooltips.footerAlign ='left';
+    Chart.defaults.global.tooltips.yPadding =10;
+    Chart.defaults.global.tooltips.xPadding =10;
+    /* 工具提示箭头偏移距离 */
+    Chart.defaults.global.tooltips.caretPadding =10;
+    /* 工具提示箭头大小 */
+    Chart.defaults.global.tooltips.caretSize =10;
+    /* 工具提示最外层容器的圆角矩形,圆角度数 */
+    Chart.defaults.global.tooltips.cornerRadius =10;
+    /* 图标颜色 */
+    Chart.defaults.global.tooltips.multiKeyBackground ='rgba(0, 99, 0, 0.8)';
+    /* 是否显示图标 */
+    Chart.defaults.global.tooltips.displayColors =true;
+    /* 工具提示边框颜色 */
+    Chart.defaults.global.tooltips.borderColor ='rgba(0, 250, 0, 0.8)';
+    /* 工具提示边框宽度 */
+    Chart.defaults.global.tooltips.borderWidth =1;
+    /* Chart.defaults.global.tooltips.callbacks ={}; */
+
+    var ctx = document.getElementById('content').getContext('2d');
+    var config = {
+      type: 'line',
+      data: {
+        labels: ['Item 1', 'Item 2', 'Item 3'],
+        datasets: [{
+          label: '1a',
+          data: [10, 20, 30],
+        }, {
+          label: '2b',
+          data: [20, 20, 40],
+        }]
+      }
+      /* ,
+            options: {
+              legendCallback: function (e) {
+                console.log(e);
+                return e;
+              },
+              legend: {
+                display: true,
+                labels: {
+                  fontColor: 'rgb(255, 99, 132)',
+                  padding: 10,
+                  generateLabels: function (context) {
+                    console.log(context.legend)
+                  },
+                  filter: function (item, data) {
+                    console.log(item)
+                    console.log(data)
+                  },
+                  usePointStyle: true
+                }
+              }
+            } */
+    }
+    window.onload = function () {
+      var line = new Chart(ctx, config);
+    }
+    var line = document.querySelector('#content');
+    line.parentNode.style.width = '500px';
+
+  </script>
+</body>
+
+</html>

@@ -47,8 +47,8 @@
       'touchstart',
       'touchmove'
     ];
-    Chart.defaults.global.hover.mode = 'dataset'; //['point','nearest','index','dataset','x','y']
-    Chart.defaults.global.hover.intersect = false;
+    Chart.defaults.global.hover.mode = 'x'; //['point','nearest','index','dataset','x','y']
+    Chart.defaults.global.hover.intersect = true;
     /* Chart.defaults.global.hover.axis = 'xy'; */
     Chart.defaults.global.hover.animationDuration = 100;
     Chart.defaults.global.hover.onHover = function () {
@@ -107,47 +107,153 @@
 
     /* 全局工具提示 */
     /* 是否启用工具提示 */
-    Chart.defaults.global.tooltips.enabled =true;
+    Chart.defaults.global.tooltips.enabled = true;
     /* 自定义工具提示 */
     /* Chart.defaults.global.tooltips.custom =function(){}; */
 
-    /* 工具提示展示数据的模式 *///['point','nearest','index','dataset','x','y']
-    Chart.defaults.global.tooltips.mode ='index';
+    /* 工具提示展示数据的模式 */ //['point','nearest','index','dataset','x','y']
+    Chart.defaults.global.tooltips.mode = 'index';
     /* 是否 只当鼠标在数据点上时,显示工具提示 */
-    Chart.defaults.global.tooltips.intersect =false;
+    Chart.defaults.global.tooltips.intersect = false;
     /* 工具提示的位置 */ // ['nearest','average']
-    Chart.defaults.global.tooltips.position ='nearest';
+    Chart.defaults.global.tooltips.position = 'nearest';
     /* 背景颜色 */
-    Chart.defaults.global.tooltips.backgroundColor ='rgba(0, 0, 0, 0.8)';
-    Chart.defaults.global.tooltips.titleFontStyle ='bold';
-    Chart.defaults.global.tooltips.titleSpacing =10;
-    Chart.defaults.global.tooltips.titleMarginBottom =10;
-    Chart.defaults.global.tooltips.titleFontColor ='rgba(222, 111, 77, 1)';
-    Chart.defaults.global.tooltips.titleAlign ='left';
-    Chart.defaults.global.tooltips.bodySpacing =10;
-    Chart.defaults.global.tooltips.bodyFontColor ='rgba(233, 29, 213, 0.8)';
-    Chart.defaults.global.tooltips.footerFontStyle ='bold';
-    Chart.defaults.global.tooltips.footerSpacing =10;
-    Chart.defaults.global.tooltips.footerMarginTop =10;
-    Chart.defaults.global.tooltips.footerFontColor ='rgba(22, 0, 22, 0.8)';
-    Chart.defaults.global.tooltips.footerAlign ='left';
-    Chart.defaults.global.tooltips.yPadding =10;
-    Chart.defaults.global.tooltips.xPadding =10;
+    Chart.defaults.global.tooltips.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    Chart.defaults.global.tooltips.titleFontStyle = 'bold';
+    Chart.defaults.global.tooltips.titleSpacing = 10;
+    Chart.defaults.global.tooltips.titleMarginBottom = 10;
+    Chart.defaults.global.tooltips.titleFontColor = 'rgba(222, 111, 77, 1)';
+    Chart.defaults.global.tooltips.titleAlign = 'left';
+    Chart.defaults.global.tooltips.bodySpacing = 10;
+    Chart.defaults.global.tooltips.bodyFontColor = 'rgba(233, 29, 213, 0.8)';
+    Chart.defaults.global.tooltips.footerFontStyle = 'bold';
+    Chart.defaults.global.tooltips.footerSpacing = 10;
+    Chart.defaults.global.tooltips.footerMarginTop = 10;
+    Chart.defaults.global.tooltips.footerFontColor = 'rgba(22, 0, 22, 0.8)';
+    Chart.defaults.global.tooltips.footerAlign = 'left';
+    Chart.defaults.global.tooltips.yPadding = 10;
+    Chart.defaults.global.tooltips.xPadding = 10;
     /* 工具提示箭头偏移距离 */
-    Chart.defaults.global.tooltips.caretPadding =10;
+    Chart.defaults.global.tooltips.caretPadding = 10;
     /* 工具提示箭头大小 */
-    Chart.defaults.global.tooltips.caretSize =10;
+    Chart.defaults.global.tooltips.caretSize = 10;
     /* 工具提示最外层容器的圆角矩形,圆角度数 */
-    Chart.defaults.global.tooltips.cornerRadius =10;
+    Chart.defaults.global.tooltips.cornerRadius = 10;
     /* 图标颜色 */
-    Chart.defaults.global.tooltips.multiKeyBackground ='rgba(0, 99, 0, 0.8)';
+    Chart.defaults.global.tooltips.multiKeyBackground = 'rgba(0, 99, 0, 0.8)';
     /* 是否显示图标 */
-    Chart.defaults.global.tooltips.displayColors =true;
+    Chart.defaults.global.tooltips.displayColors = true;
     /* 工具提示边框颜色 */
-    Chart.defaults.global.tooltips.borderColor ='rgba(0, 250, 0, 0.8)';
+    Chart.defaults.global.tooltips.borderColor = 'rgba(0, 250, 0, 0.8)';
     /* 工具提示边框宽度 */
-    Chart.defaults.global.tooltips.borderWidth =1;
+    Chart.defaults.global.tooltips.borderWidth = 1;
     /* Chart.defaults.global.tooltips.callbacks ={}; */
+
+    /* 标签全局设置 */
+    Chart.defaults.global.legend.display = true;
+    Chart.defaults.global.legend.position = 'top';
+    Chart.defaults.global.legend.fullWidth = true;
+    /* 反着排序 */
+    Chart.defaults.global.legend.reverse = true;
+    /* 不知道有什么用 */
+    Chart.defaults.global.legend.weight = 0;
+    /* 标签的宽度 */
+    Chart.defaults.global.legend.labels.boxWidth = 10;
+    /* 标签的分布 */
+    Chart.defaults.global.legend.labels.padding = 20;
+    Chart.defaults.global.legend.onHover = function () {
+      console.log('标签鼠标悬浮')
+    };
+    Chart.defaults.global.legend.onClick = function () {
+      console.log('标签鼠标点击')
+    };
+
+    /* 全局标题设置 */
+    Chart.defaults.global.title.display = true;
+    Chart.defaults.global.title.fontStyle = 'bold';
+    Chart.defaults.global.title.fullWidth = false;
+    Chart.defaults.global.title.lineHeight = 1.2;
+    Chart.defaults.global.title.padding = 10;
+    Chart.defaults.global.title.position = 'top';
+    Chart.defaults.global.title.text = '标题';
+    Chart.defaults.global.title.weight = 100;
+
+    /* 坐标轴配置 */
+    Chart.defaults.scale.display = true;
+    /* 不知道有什么用 */
+    Chart.defaults.scale.position = 'left';
+    /* 坐标不从xy交点开始,而是偏移一段距离 */
+    Chart.defaults.scale.offset = true;
+
+    /* 坐标网格线 */
+    Chart.defaults.scale.gridLines.display = true;
+    /* 网格线的颜色 */
+    Chart.defaults.scale.gridLines.color = 'rgba(22, 99, 222, 0.8)';
+    Chart.defaults.scale.gridLines.lineWidth = 1;
+    /* 是否画出纵轴轴线 */
+    Chart.defaults.scale.gridLines.drawBorder = true;
+    /* 是否画出坐标轴之间的网格线 */
+    Chart.defaults.scale.gridLines.drawOnChartArea = true;
+    /* 是否画出xy轴上的刻度线 */
+    Chart.defaults.scale.gridLines.drawTicks = true;
+    /* 刻度线长度 */
+    Chart.defaults.scale.gridLines.tickMarkLength = 10;
+    /* 不知道有什么用 */
+    Chart.defaults.scale.gridLines.zeroLineWidth = 10;
+    Chart.defaults.scale.gridLines.zeroLineColor = 'rgba(0, 0, 0, 0.1)';
+    Chart.defaults.scale.gridLines.zeroLineBorderDash = [];
+    Chart.defaults.scale.gridLines.zeroLineBorderDashOffset = 0;
+    Chart.defaults.scale.gridLines.offsetGridLines = false;
+    Chart.defaults.scale.gridLines.borderDash = [];
+    Chart.defaults.scale.gridLines.borderDashOffset = 0;
+
+    /* 坐标轴标签 */
+    Chart.defaults.scale.scaleLabel.display = true;
+    Chart.defaults.scale.scaleLabel.labelString = '坐标轴标签';
+    Chart.defaults.scale.scaleLabel.lineHeight = true;
+    Chart.defaults.scale.scaleLabel.padding = {
+      top: 5,
+      bottom: 10
+    }
+
+    /* 坐标轴刻度 */
+    Chart.defaults.scale.ticks.beginAtZero = false;
+    /* 最小刻度值 偏转度数 */
+    Chart.defaults.scale.ticks.minRotation = 90;
+    Chart.defaults.scale.ticks.maxRotation = 180;
+    /* 坐标轴最大值最小值 */
+    /* Chart.defaults.scale.ticks.min = 0;
+    Chart.defaults.scale.ticks.max = 80; */
+    /* 最大刻度数量 */
+    Chart.defaults.scale.ticks.maxTicksLimit = 4;
+    /* 刻度值小数点位数, */
+    Chart.defaults.scale.ticks.precision = 2;
+    /* 刻度间隔 */
+    Chart.defaults.scale.ticks.stepSize = 7.3;
+    /* 建议的最大刻度值,当数据中刻度值小于这个值时采用. */
+    Chart.defaults.scale.ticks.suggestedMax = 0;
+    Chart.defaults.scale.ticks.suggestedMin = 0;
+    
+    /* 刻度值以坐标轴为轴对称显示到另一侧 */
+    Chart.defaults.scale.ticks.mirror = true;
+    /* 刻度值和刻度的距离 */
+    Chart.defaults.scale.ticks.padding = 1;
+    /* 反向刻度线 */
+    Chart.defaults.scale.ticks.reverse = false;
+    Chart.defaults.scale.ticks.display = true;
+    /* 不知道有什么用 */
+    Chart.defaults.scale.ticks.autoSkip = true;
+    Chart.defaults.scale.ticks.autoSkipPadding = 10;
+    Chart.defaults.scale.ticks.minor = {};
+    Chart.defaults.scale.ticks.major = {};
+
+    /* 图表默认配置 */ //这里只有线图
+    Chart.defaults.line.showLines = true;
+    /* 不知道有什么用 */
+    Chart.defaults.line.spanGaps = true;
+    /* 不知道有什么用 */
+    Chart.defaults.line.hover.mode = 'label';
+    Chart.defaults.line.scales.xAxes[0].type = 'category'
 
     var ctx = document.getElementById('content').getContext('2d');
     var config = {

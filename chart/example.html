@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>bar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./Chart.bundle.js"></script>
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      overflow: auto;
+      justify-content: center;
+    }
+
+    .box {
+      width: 300px;
+      height: 300px;
+      margin: 10px;
+      overflow: auto;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <canvas id="simpleBar">
+    </canvas>
+    <p>一个简单的bar实例,包含了90%+的配置选项.</p>
+    <p>列出的选项不必全部使用,此处是用于展示.</p>
+    <p>接下来的bar例子都以这个为模板</p>
+  </div>
+  <div class="box">
+    <canvas id="percentageBar">
+    </canvas>
+    <p>调整柱体的颜色:<code> data.datasets </code>或者<code> options.elements.rectangle </code></p>
+    <p>调整柱体的宽度间距:<code> options.scales.xAxes </code>下的<code>barPercentage categoryPercentage barThickness maxBarThickness minBarLength</code><a href="https://www.chartjs.org/docs/latest/charts/bar.html#scale-configuration">#</a></p>
+    <p>柱体宽度计算方法如图-1</p>
+  </div>
+  <div class="box">
+    <img src="./image/percentage.png.jpg" alt="">
+    <p>图-1</p>
+    <p>总宽度取决于canvas宽度和lables数量</p>
+    <p>柱体占据宽度=总宽度*categoryPercentage</p>
+    <p>柱体宽度=柱体占据宽度*barPercentage/柱体数量</p>
+  </div>
+  <div class="box">
+    <canvas id="stackedBar">
+    </canvas>
+    <p>堆叠图,使用<code> options.scales.xAxes =>stacked</code>选项</p>
+  </div>
+  <div class="box">
+    <canvas id="horizontalBar">
+    </canvas>
+    <p>水平柱图</p>
+  </div>
+  <div style="width:100%"></div>
+  <div class="box">
+    <canvas id="simpleLine">
+    </canvas>
+
+    <p>一个简单的line实例,包含了90%+的配置选项.</p>
+    <p>列出的选项不必全部使用,此处是用于展示.</p>
+    <p>接下来的line例子都以这个为模板</p>
+  </div>
+  <div class="box">
+    <canvas id="bar">
+    </canvas>
+  </div>
+  <div class="box">
+    <canvas id="bar">
+    </canvas>
+  </div>
+  <script>
+    var simpleBar = {
+      type: 'bar',
+      data: {
+        labels: ['小米', '三星', '苹果'],
+        datasets: [{
+          label: '价格',
+          data: [10, 20, 30],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 99, 132, 0.6)',
+          hoverBorderColor: 'rgba(255, 99, 132, 0.8)',
+          hoverBorderWidth: 1,
+          /* xAxisID:'',
+          yAxisID:'', */
+        }, {
+          label: '受欢迎程度',
+          data: [60, 20, 80],
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderColor: 'rgba(255, 159, 64, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 159, 64, 0.6)',
+          hoverBorderColor: 'rgba(255, 159, 64, 0.8)',
+          hoverBorderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        responsiveAnimationDuration: 0,
+        defaultColor: "rgba(0,0,0,0.1)",
+        defaultFontColor: "#666",
+        defaultFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        defaultFontSize: 12,
+        defaultFontStyle: "normal",
+        maintainAspectRatio: true,
+        events: ["mousemove", "mouseout", "click", "touchstart", "touchmove"],
+        animation: {
+          duration: 1000,
+          easing: "easeOutQuart"
+        },
+        elements: {
+          arc: {
+            backgroundColor: "rgba(0,0,0,0.1)",
+            borderColor: "#fff",
+            borderWidth: 2,
+          },
+          line: {
+            backgroundColor: "rgba(0,0,0,0.1)",
+            borderCapStyle: "butt",
+            borderColor: "rgba(0,0,0,0.1)",
+            borderDash: [],
+            borderDashOffset: 0,
+            borderJoinStyle: "miter",
+            borderWidth: 3,
+            capBezierPoints: true,
+            fill: true,
+            tension: 0.4,
+          },
+          point: {
+            backgroundColor: "rgba(0,0,0,0.1)",
+            borderColor: "rgba(0,0,0,0.1)",
+            borderWidth: 1,
+            hitRadius: 1,
+            hoverBorderWidth: 1,
+            hoverRadius: 4,
+            pointStyle: "circle",
+            radius: 4,
+          },
+          rectangle: {
+            backgroundColor: "rgba(0,0,0,0.1)",
+            borderColor: "rgba(0,0,0,0.1)",
+            borderSkipped: "bottom",
+            borderWidth: 0,
+          }
+        },
+        hover: {
+          animationDuration: 400,
+          axis: "x",
+          intersect: false,
+          mode: "point",
+        },
+        layout: {
+          padding: {
+            bottom: 0,
+            left: 0,
+            right: 0,
+            top: 0,
+          }
+        },
+        legend: {
+          display: true,
+          fullWidth: true,
+          position: "top",
+          reverse: false,
+          weight: 1000,
+          labels: {
+            boxWidth: 40,
+            padding: 10.
+          }
+        },
+        plugins: {
+          filler: {
+            propagate: true
+          }
+        },
+        scales: {
+          xAxes: [{
+            barPercentage: 0.9,
+            categoryPercentage: 0.8,
+            display: true,
+            id: "x-axis-0",
+            offset: true,
+            position: "bottom",
+            type: "category",
+            gridLines: {
+              borderDash: [],
+              borderDashOffset: 0,
+              color: "rgba(0, 0, 0, 0.1)",
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: true,
+              drawTicks: true,
+              lineWidth: 1,
+              offsetGridLines: true,
+              tickMarkLength: 10,
+              zeroLineBorderDash: [],
+              zeroLineBorderDashOffset: 0,
+              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineWidth: 1
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "",
+              lineHeight: 1.2,
+              padding: {
+                top: 4,
+                bottom: 4
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 0,
+              beginAtZero: false,
+              display: true,
+              labelOffset: 0,
+              maxRotation: 50,
+              minRotation: 0,
+              mirror: false,
+              padding: 0,
+              reverse: false,
+              major: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              },
+              minor: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              }
+            }
+          }],
+          yAxes: [{
+            display: true,
+            id: "y-axis-0",
+            offset: false,
+            position: "left",
+            type: "linear",
+            gridLines: {
+              borderDash: [],
+              borderDashOffset: 0,
+              color: "rgba(0, 0, 0, 0.1)",
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: true,
+              drawTicks: true,
+              lineWidth: 1,
+              offsetGridLines: false,
+              tickMarkLength: 10,
+              zeroLineBorderDash: [],
+              zeroLineBorderDashOffset: 0,
+              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineWidth: 1,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "",
+              lineHeight: 1.2,
+              padding: {
+                top: 4,
+                bottom: 4
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 0,
+              beginAtZero: false,
+              display: true,
+              labelOffset: 0,
+              maxRotation: 50,
+              minRotation: 0,
+              mirror: false,
+              padding: 0,
+              reverse: false,
+              major: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              },
+              minor: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              }
+            },
+          }],
+        },
+        title: {
+          display: false,
+          fontStyle: "bold",
+          fullWidth: true,
+          lineHeight: 1.2,
+          padding: 10,
+          position: "top",
+          text: "",
+          weight: 2000,
+        },
+        tooltips: {
+          axis: "xy",
+          backgroundColor: "rgba(0,0,0,0.8)",
+          bodyAlign: "left",
+          bodyFontColor: "#fff",
+          bodySpacing: 2,
+          borderColor: "rgba(0,0,0,0)",
+          borderWidth: 0,
+          caretPadding: 2,
+          caretSize: 5,
+          cornerRadius: 6,
+          custom: null,
+          displayColors: true,
+          enabled: true,
+          footerAlign: "left",
+          footerFontColor: "#fff",
+          footerFontStyle: "bold",
+          footerMarginTop: 6,
+          footerSpacing: 2,
+          intersect: false,
+          mode: "point",
+          multiKeyBackground: "#fff",
+          position: "average",
+          titleAlign: "left",
+          titleFontColor: "#fff",
+          titleFontStyle: "bold",
+          titleMarginBottom: 6,
+          titleSpacing: 2,
+          xPadding: 6,
+          yPadding: 6,
+        }
+      }
+    };
+    var percentageBar = {
+      type: 'bar',
+      data: {
+        labels: ['小米', '三星', '苹果'],
+        datasets: [{
+          label: '价格',
+          data: [10, 20, 30],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 99, 132, 0.6)',
+          hoverBorderColor: 'rgba(255, 99, 132, 0.8)',
+          hoverBorderWidth: 1,
+          /* xAxisID:'',
+          yAxisID:'', */
+        }, {
+          label: '受欢迎程度',
+          data: [60, 20, 80],
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderColor: 'rgba(255, 159, 64, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 159, 64, 0.6)',
+          hoverBorderColor: 'rgba(255, 159, 64, 0.8)',
+          hoverBorderWidth: 1,
+        }]
+      },
+      options: {
+        responsive: true,
+        responsiveAnimationDuration: 0,
+        elements: {
+          rectangle: {
+            backgroundColor: "rgba(0,0,0,0.1)",
+            borderColor: "rgba(0,0,0,0.1)",
+            borderSkipped: "bottom",
+            borderWidth: 0,
+          }
+        },
+        scales: {
+          xAxes: [{
+            /* 
+            barPercentage: 0.5,
+            categoryPercentage: 0.6 
+            */
+            /* barThickness 决定柱体占据宽度,如果没有设置maxBarThickness,柱体均分占据宽度,柱体宽度为barThickness,当maxBarThickness<barThickness,以当maxBarThickness为柱体宽度,存在柱体间隔.*/
+            /* barThickness: 10,
+            maxBarThickness: 20, */
+            minBarLength: 44,
+            display: true,
+            id: "x-axis-0",
+            offset: true,
+            position: "bottom",
+            type: "category",
+            gridLines: {
+              borderDash: [],
+              borderDashOffset: 0,
+              color: "rgba(0, 0, 0, 0.1)",
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: true,
+              drawTicks: true,
+              lineWidth: 1,
+              offsetGridLines: true,
+              tickMarkLength: 10,
+              zeroLineBorderDash: [],
+              zeroLineBorderDashOffset: 0,
+              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineWidth: 1
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "",
+              lineHeight: 1.2,
+              padding: {
+                top: 4,
+                bottom: 4
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 0,
+              beginAtZero: false,
+              display: true,
+              labelOffset: 0,
+              maxRotation: 50,
+              minRotation: 0,
+              mirror: false,
+              padding: 0,
+              reverse: false,
+              major: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              },
+              minor: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              }
+            }
+          }],
+          yAxes: [{
+            display: true,
+            id: "y-axis-0",
+            offset: false,
+            position: "left",
+            type: "linear",
+            gridLines: {
+              borderDash: [],
+              borderDashOffset: 0,
+              color: "rgba(0, 0, 0, 0.1)",
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: true,
+              drawTicks: true,
+              lineWidth: 1,
+              offsetGridLines: false,
+              tickMarkLength: 10,
+              zeroLineBorderDash: [],
+              zeroLineBorderDashOffset: 0,
+              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineWidth: 1,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "",
+              lineHeight: 1.2,
+              padding: {
+                top: 4,
+                bottom: 4
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 0,
+              beginAtZero: false,
+              display: true,
+              labelOffset: 0,
+              maxRotation: 50,
+              minRotation: 0,
+              mirror: false,
+              padding: 0,
+              reverse: false,
+              major: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              },
+              minor: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              }
+            },
+          }],
+        }
+      }
+    };
+    var stackedBar = {
+      type: 'bar',
+      data: {
+        labels: ['小米', '三星', '苹果'],
+        datasets: [{
+          label: '价格',
+          data: [10, 20, 30],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 99, 132, 0.6)',
+          hoverBorderColor: 'rgba(255, 99, 132, 0.8)',
+          hoverBorderWidth: 1,
+          /* xAxisID:'',
+          yAxisID:'', */
+        }, {
+          label: '受欢迎程度',
+          data: [60, 20, 80],
+          backgroundColor: 'rgba(255, 159, 99, 0.2)',
+          borderColor: 'rgba(255, 159, 99, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 159, 64, 0.6)',
+          hoverBorderColor: 'rgba(255, 159, 64, 0.8)',
+          hoverBorderWidth: 1,
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            stacked: true
+          }],
+          yAxes: [{
+            stacked: true
+          }],
+        }
+      }
+    }
+    var horizontalBar = {
+      type: 'horizontalBar',
+      data: {
+        labels: ['小米', '三星', '苹果'],
+        datasets: [{
+          label: '价格',
+          data: [10, 20, 30],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 99, 132, 0.6)',
+          hoverBorderColor: 'rgba(255, 99, 132, 0.8)',
+          hoverBorderWidth: 1,
+          /* xAxisID:'',
+          yAxisID:'', */
+        }, {
+          label: '受欢迎程度',
+          data: [60, 20, 80],
+          backgroundColor: 'rgba(255, 159, 99, 0.2)',
+          borderColor: 'rgba(255, 159, 99, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 159, 64, 0.6)',
+          hoverBorderColor: 'rgba(255, 159, 64, 0.8)',
+          hoverBorderWidth: 1,
+        }]
+      },
+      options: {
+        scales: {
+          xAxes: [{
+            categoryPercentage: 0.5,
+            display: true,
+            id: "x-axis-0",
+            offset: true,
+            position: "bottom",
+            type: "linear",
+            gridLines: {
+              borderDash: [],
+              borderDashOffset: 0,
+              color: "rgba(0, 0, 0, 0.1)",
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: true,
+              drawTicks: true,
+              lineWidth: 1,
+              offsetGridLines: true,
+              tickMarkLength: 10,
+              zeroLineBorderDash: [],
+              zeroLineBorderDashOffset: 0,
+              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineWidth: 1
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "",
+              lineHeight: 1.2,
+              padding: {
+                top: 4,
+                bottom: 4
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 0,
+              beginAtZero: false,
+              display: true,
+              labelOffset: 0,
+              maxRotation: 50,
+              minRotation: 0,
+              mirror: false,
+              padding: 0,
+              reverse: false,
+              major: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              },
+              minor: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              }
+            }
+          }],
+          yAxes: [{
+            display: true,
+            id: "y-axis-0",
+            offset: true,
+            position: "left",
+            type: "category",
+            gridLines: {
+              borderDash: [],
+              borderDashOffset: 0,
+              color: "rgba(0, 0, 0, 0.1)",
+              display: true,
+              drawBorder: true,
+              drawOnChartArea: true,
+              drawTicks: true,
+              lineWidth: 1,
+              offsetGridLines: false,
+              tickMarkLength: 10,
+              zeroLineBorderDash: [],
+              zeroLineBorderDashOffset: 0,
+              zeroLineColor: "rgba(0,0,0,0.25)",
+              zeroLineWidth: 1,
+            },
+            scaleLabel: {
+              display: false,
+              labelString: "",
+              lineHeight: 1.2,
+              padding: {
+                top: 4,
+                bottom: 4
+              }
+            },
+            ticks: {
+              autoSkip: true,
+              autoSkipPadding: 0,
+              beginAtZero: false,
+              display: true,
+              labelOffset: 0,
+              maxRotation: 50,
+              minRotation: 0,
+              mirror: false,
+              padding: 0,
+              reverse: false,
+              major: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              },
+              minor: {
+                autoSkip: true,
+                autoSkipPadding: 0,
+                beginAtZero: false,
+                display: true,
+                labelOffset: 0,
+                maxRotation: 50,
+                minRotation: 0,
+                mirror: false,
+                padding: 0,
+                reverse: false,
+              }
+            },
+          }],
+        }
+      }
+    };
+
+    var simpleLine = {
+      type: 'line',
+      data: {
+        labels: ['1月', '二月', '三月'],
+        datasets: [{
+          label: '价格',
+          data: [10, 20, 30],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 99, 132, 0.6)',
+          hoverBorderColor: 'rgba(255, 99, 132, 0.8)',
+          hoverBorderWidth: 1,
+          /* xAxisID:'',
+          yAxisID:'', */
+        }, {
+          label: '销售数量',
+          data: [60, 20, 80],
+          backgroundColor: 'rgba(255, 159, 64, 0.2)',
+          borderColor: 'rgba(255, 159, 64, 1)',
+          borderWidth: 1,
+          borderSkipped: 'bottom',
+          hoverBackgroundColor: 'rgba(255, 159, 64, 0.6)',
+          hoverBorderColor: 'rgba(255, 159, 64, 0.8)',
+          hoverBorderWidth: 1,
+        }]
+      },
+      options: {
+        "responsive": true,
+        "responsiveAnimationDuration": 0,
+        "maintainAspectRatio": true,
+        "events": ["mousemove", "mouseout", "click", "touchstart", "touchmove"],
+        "hover": {
+          "onHover": null,
+          "mode": "label",
+          "intersect": true,
+          "animationDuration": 400
+        },
+        "defaultColor": "rgba(0,0,0,0.1)",
+        "defaultFontColor": "#666",
+        "defaultFontFamily": "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+        "defaultFontSize": 12,
+        "defaultFontStyle": "normal",
+        "showLines": true,
+        "elements": {
+          "arc": {
+            "backgroundColor": "rgba(0,0,0,0.1)",
+            "borderColor": "#fff",
+            "borderWidth": 2
+          },
+          "line": {
+            "tension": 0.4,
+            "backgroundColor": "rgba(0,0,0,0.1)",
+            "borderWidth": 3,
+            "borderColor": "rgba(0,0,0,0.1)",
+            "borderCapStyle": "butt",
+            "borderDash": [],
+            "borderDashOffset": 0,
+            "borderJoinStyle": "miter",
+            "capBezierPoints": true,
+            "fill": true
+          },
+          "point": {
+            "radius": 3,
+            "pointStyle": "circle",
+            "backgroundColor": "rgba(0,0,0,0.1)",
+            "borderColor": "rgba(0,0,0,0.1)",
+            "borderWidth": 1,
+            "hitRadius": 1,
+            "hoverRadius": 4,
+            "hoverBorderWidth": 1
+          },
+          "rectangle": {
+            "backgroundColor": "rgba(0,0,0,0.1)",
+            "borderColor": "rgba(0,0,0,0.1)",
+            "borderSkipped": "bottom",
+            "borderWidth": 0
+          }
+        },
+        "layout": {
+          "padding": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+          }
+        },
+        "plugins": {
+          "filler": {
+            "propagate": true
+          }
+        },
+        "animation": {
+          "duration": 1000,
+          "easing": "easeOutQuart"
+        },
+        "tooltips": {
+          "enabled": true,
+          "custom": null,
+          "mode": "nearest",
+          "position": "average",
+          "intersect": true,
+          "backgroundColor": "rgba(0,0,0,0.8)",
+          "titleFontStyle": "bold",
+          "titleSpacing": 2,
+          "titleMarginBottom": 6,
+          "titleFontColor": "#fff",
+          "titleAlign": "left",
+          "bodySpacing": 2,
+          "bodyFontColor": "#fff",
+          "bodyAlign": "left",
+          "footerFontStyle": "bold",
+          "footerSpacing": 2,
+          "footerMarginTop": 6,
+          "footerFontColor": "#fff",
+          "footerAlign": "left",
+          "yPadding": 6,
+          "xPadding": 6,
+          "caretPadding": 2,
+          "caretSize": 5,
+          "cornerRadius": 6,
+          "multiKeyBackground": "#fff",
+          "displayColors": true,
+          "borderColor": "rgba(0,0,0,0)",
+          "borderWidth": 0,
+          "callbacks": {}
+        },
+        "legend": {
+          "display": true,
+          "position": "top",
+          "fullWidth": true,
+          "reverse": false,
+          "weight": 1000,
+          "onHover": null,
+          "labels": {
+            "boxWidth": 40,
+            "padding": 10
+          }
+        },
+        "title": {
+          "display": false,
+          "fontStyle": "bold",
+          "fullWidth": true,
+          "lineHeight": 1.2,
+          "padding": 10,
+          "position": "top",
+          "text": "",
+          "weight": 2000
+        },
+        "spanGaps": false,
+        "scales": {
+          "xAxes": [{
+            "display": true,
+            "position": "bottom",
+            "offset": false,
+            "gridLines": {
+              "display": true,
+              "color": "rgba(0, 0, 0, 0.1)",
+              "lineWidth": 1,
+              "drawBorder": true,
+              "drawOnChartArea": true,
+              "drawTicks": true,
+              "tickMarkLength": 10,
+              "zeroLineWidth": 1,
+              "zeroLineColor": "rgba(0,0,0,0.25)",
+              "zeroLineBorderDash": [],
+              "zeroLineBorderDashOffset": 0,
+              "offsetGridLines": false,
+              "borderDash": [],
+              "borderDashOffset": 0
+            },
+            "scaleLabel": {
+              "display": false,
+              "labelString": "",
+              "lineHeight": 1.2,
+              "padding": {
+                "top": 4,
+                "bottom": 4
+              }
+            },
+            "ticks": {
+              "beginAtZero": false,
+              "minRotation": 0,
+              "maxRotation": 50,
+              "mirror": false,
+              "padding": 0,
+              "reverse": false,
+              "display": true,
+              "autoSkip": true,
+              "autoSkipPadding": 0,
+              "labelOffset": 0,
+              "minor": {
+                "beginAtZero": false,
+                "minRotation": 0,
+                "maxRotation": 50,
+                "mirror": false,
+                "padding": 0,
+                "reverse": false,
+                "display": true,
+                "autoSkip": true,
+                "autoSkipPadding": 0,
+                "labelOffset": 0
+              },
+              "major": {
+                "beginAtZero": false,
+                "minRotation": 0,
+                "maxRotation": 50,
+                "mirror": false,
+                "padding": 0,
+                "reverse": false,
+                "display": true,
+                "autoSkip": true,
+                "autoSkipPadding": 0,
+                "labelOffset": 0
+              }
+            },
+            "type": "category",
+            "id": "x-axis-0"
+          }],
+          "yAxes": [{
+            "display": true,
+            "position": "left",
+            "offset": false,
+            "gridLines": {
+              "display": true,
+              "color": "rgba(0, 0, 0, 0.1)",
+              "lineWidth": 1,
+              "drawBorder": true,
+              "drawOnChartArea": true,
+              "drawTicks": true,
+              "tickMarkLength": 10,
+              "zeroLineWidth": 1,
+              "zeroLineColor": "rgba(0,0,0,0.25)",
+              "zeroLineBorderDash": [],
+              "zeroLineBorderDashOffset": 0,
+              "offsetGridLines": false,
+              "borderDash": [],
+              "borderDashOffset": 0
+            },
+            "scaleLabel": {
+              "display": false,
+              "labelString": "",
+              "lineHeight": 1.2,
+              "padding": {
+                "top": 4,
+                "bottom": 4
+              }
+            },
+            "ticks": {
+              "beginAtZero": false,
+              "minRotation": 0,
+              "maxRotation": 50,
+              "mirror": false,
+              "padding": 0,
+              "reverse": false,
+              "display": true,
+              "autoSkip": true,
+              "autoSkipPadding": 0,
+              "labelOffset": 0,
+              "minor": {
+                "beginAtZero": false,
+                "minRotation": 0,
+                "maxRotation": 50,
+                "mirror": false,
+                "padding": 0,
+                "reverse": false,
+                "display": true,
+                "autoSkip": true,
+                "autoSkipPadding": 0,
+                "labelOffset": 0
+              },
+              "major": {
+                "beginAtZero": false,
+                "minRotation": 0,
+                "maxRotation": 50,
+                "mirror": false,
+                "padding": 0,
+                "reverse": false,
+                "display": true,
+                "autoSkip": true,
+                "autoSkipPadding": 0,
+                "labelOffset": 0
+              }
+            },
+            "type": "linear",
+            "id": "y-axis-0"
+          }]
+        }
+      }
+    }
+
+    var simpleBarCtx = document.getElementById('simpleBar').getContext('2d');
+    var percentageBarCtx = document.getElementById('percentageBar').getContext('2d');
+    var stackedBarCtx = document.getElementById('stackedBar').getContext('2d');
+    var horizontalBarCtx = document.getElementById('horizontalBar').getContext('2d');
+    var simpleLineCtx = document.getElementById('simpleLine').getContext('2d');
+    window.onload = function () {
+      new Chart(simpleBarCtx, simpleBar);
+      new Chart(percentageBarCtx, percentageBar);
+      new Chart(stackedBarCtx, stackedBar);
+      new Chart(horizontalBarCtx, horizontalBar);
+
+      var asd = new Chart(simpleLineCtx, simpleLine);
+    }
+
+  </script>
+</body>
+
+</html>

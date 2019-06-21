@@ -1,0 +1,34 @@
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>history Api test</title>
+    </head>
+    <body>
+      secound
+      <button onclick="newHerf()">newHerf</button>
+      <button onclick="goback()">goback</button>
+      <button onclick="back()">back</button>
+      <button onclick="goandrefresh()">go and refresh</button>
+    
+      <script>
+        function newHerf(){
+          window.location.href +='#/123/'
+          console.log('newHerf')
+        }
+        function goback(){
+          window.history.go(-1);
+          console.log('goback');
+        }
+        function back(){
+          window.history.back();
+          console.log('back');
+        }
+        function goandrefresh(){
+          window.location.href = './index2.html'
+          console.log('goandrefresh');
+        }
+      </script>
+    </body>
+    </html>
